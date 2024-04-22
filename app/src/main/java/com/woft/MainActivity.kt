@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
+import com.woft.database.scripts.AppDatabase
 import com.woft.ui.theme.WoftTheme
 import com.woft.navigation.AppNavigation
 

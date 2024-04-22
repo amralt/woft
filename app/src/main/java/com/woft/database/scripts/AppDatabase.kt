@@ -1,6 +1,10 @@
 package com.woft.database.scripts
 
-@Database(entities = [Product::class], version = 1)
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.woft.database.Craft
+
+@Database(entities = [Craft::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun productDao(): ProductDao
+    abstract fun craftsDao(): Craft
 }
