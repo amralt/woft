@@ -16,11 +16,6 @@ import com.woft.database.Craft
 @Composable
 fun ListCrafts(navHostController: NavHostController, listCrafts: List<Craft>) {
 
-//    val userDao = db.userDao()
-//    val users: List<Craft> = userDao.getAll()
-
-
-
     Column {
         Text("second String")
         Button({navHostController.navigateUp()}) {
@@ -31,8 +26,8 @@ fun ListCrafts(navHostController: NavHostController, listCrafts: List<Craft>) {
             verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
 //            TODO здесь нужно передавать объекты из дб
-            items(listCrafts, key = {it.inc()}) {
-                CraftSection(craft = )
+            items(listCrafts, key = {it.uid}) {
+                CraftSection(craft = it)
             }
         }
     }

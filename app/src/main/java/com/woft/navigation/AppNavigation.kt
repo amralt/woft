@@ -1,8 +1,5 @@
 package com.woft.navigation
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -22,12 +19,15 @@ fun AppNavigation(navHostController: NavHostController) {
 
     NavHost(navController = navHostController, startDestination = "main") {
         composable("main") {
-            val uiState = viewModel<MainViewModel>().text.collectAsState()
+            val viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
+            val uiState = viewModel.text.collectAsState()
             MainScreen(navHostController, uiState.value, {it})
 
         }
         composable("second") {
-            ListCrafts(navHostController)
+            val viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
+            val crafts = viewModel.listCraft.collectAsState()
+            ListCrafts(navHostController, crafts.value)
         }
     }
 }
