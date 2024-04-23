@@ -8,10 +8,8 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import androidx.room.Room
-import com.woft.MainActivity
 import com.woft.database.Craft
-import com.woft.database.scripts.AppDatabase
+import com.woft.database.CraftsDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +22,7 @@ import kotlinx.coroutines.launch
  */
 class MainViewModel(
     private val savedStateHandle: SavedStateHandle,
-    private val applicationContext: Context
+    private val applicationContext: Context,
 ): ViewModel() {
     // obsorval класс полуает данные и при их обновлении они меняются
 
@@ -41,15 +39,6 @@ class MainViewModel(
         //Dispatchers - отдельные потоки
         job = viewModelScope.launch(Dispatchers.IO) {
             // job - объект работы, с помощью которого можно останавливать карутину
-            println("start init db" )
-            val db = Room.databaseBuilder(
-                    applicationContext,
-                    AppDatabase::class.java, "database-name"
-            ).build()
-
-            val craftsDao = db.craftsDao()
-            listCraft.update { craftsDao.getAll() }
-
         }
     }
 
