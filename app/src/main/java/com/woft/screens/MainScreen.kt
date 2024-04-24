@@ -26,7 +26,7 @@ import com.woft.database.Craft
 fun MainScreen(
     navHostController: NavHostController,
     currentCraft: String,
-    craft: Craft?,
+    //craft: Craft?,
     onChangeButtonClick: (String) -> Unit
 ) {
     Column(
