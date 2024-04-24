@@ -70,7 +70,19 @@ fun MainScreen(
                     selected = true,
                     onClick = { navHostController.navigate("craftList") }
                 )
-
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Default.,
+                            contentDescription = null
+                        )
+                    },
+                    label = {
+                        Text("Инструкция")
+                    },
+                    selected = true,
+                    onClick = { navHostController.navigate("main") }
+                )
             }
         }
 
