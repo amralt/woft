@@ -26,7 +26,15 @@ class MainViewModel(
 ): ViewModel() {
     // obsorval класс полуает данные и при их обновлении они меняются
 
-    val currentCraft: MutableStateFlow<String> = MutableStateFlow("hello woft")
+    //val currentCraft: MutableStateFlow<String> = MutableStateFlow("hello woft")
+    val currentCraft: MutableStateFlow<Craft> = MutableStateFlow(
+        Craft(
+            uid = -1,
+            craftName = "Woft",
+            description = "Наше приложение поможет вам подготовиться к путешествиям.Здесь вы увидете самые разные советы для начинающих авантюристов.",
+            picPath = null
+        )
+    )
     val listCraft: MutableStateFlow<List<Craft>> = MutableStateFlow(listOf<Craft>(
         Craft(
             uid = -1,
@@ -37,8 +45,8 @@ class MainViewModel(
     ))
 
     private var job: Job? = null
-    fun changeText(newText: String) {
-        currentCraft.update { newText }
+    fun changeCraft(newCraft: Craft) {
+        currentCraft.update { newCraft }
     }
 
     init {
