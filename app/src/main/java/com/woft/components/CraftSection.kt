@@ -25,8 +25,14 @@ fun CraftSection(
 ) {
     Surface(
         shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surfaceVariant,
+        //color = MaterialTheme.colorScheme.surfaceVariant,
         modifier = modifier
+elevation = CardDefaults.cardElevation(10.dp),
+            //border = BorderStroke(3.dp,Color.Gray)
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White
+            )
+         onclick = navHostController.navigate('main')
     ) {
         Card {
             Row(
@@ -39,12 +45,24 @@ fun CraftSection(
     //                contentScale = ContentScale.Crop,
     //                modifier = Modifier.size(80.dp)
     //            )
+
+                    Text(
+                        text = craft.title,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(10.dp)
+                    )
                 craft.description?.let {
                     Text(
                         //TODO а нужна ли нам бд если мы можем все засунут ьв ресурсы?
             //                    text = stringResource(craft.description),
                         text = it,
                         style = MaterialTheme.typography.titleMedium,
+fontSize = 13.sp,
+                    modifier = Modifier.padding(6.dp),
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis,
+                    color = Color.Gray,
                         modifier = Modifier.padding(horizontal = 16.dp)
                     )
                 }
