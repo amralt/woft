@@ -12,7 +12,7 @@ import com.woft.screens.MainScreen
 import com.woft.ui.theme.view.MainViewModel
 
 /**
- * отвечтает за NavHost
+ * отвечтает за навигацию в приложении 
  */
 @Composable
 fun AppNavigation(navHostController: NavHostController, stateCraftList: List<Craft>) {
@@ -25,7 +25,7 @@ fun AppNavigation(navHostController: NavHostController, stateCraftList: List<Cra
             MainScreen(navHostController, uiState.value, { it })
 
         }
-        composable("second") {
+        composable("craftList") {
             val viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
             val crafts = viewModel.listCraft.collectAsState()
             ListCrafts(navHostController, crafts.value)
