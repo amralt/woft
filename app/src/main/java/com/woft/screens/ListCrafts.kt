@@ -78,6 +78,19 @@ fun ListCrafts(navHostController: NavHostController, listCrafts: List<Craft>) {
                     selected = true,
                     onClick = { navHostController.navigate("main") }
                 )
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Default.List,
+                            contentDescription = null
+                        )
+                    },
+                    label = {
+                        Text("список")
+                    },
+                    selected = true,
+                    onClick = { navHostController.navigate("main") }
+                )
 
             }
         }
