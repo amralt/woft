@@ -39,7 +39,7 @@ fun ListCrafts(navHostController: NavHostController, listCrafts: List<Craft>) {
             verticalArrangement = Arrangement.Top,
             modifier = androidx.compose.ui.Modifier
                 .background(MaterialTheme.colorScheme.outline)
-                .fillMaxHeight(0.15f)
+                .fillMaxHeight(0.1f)
                 .fillMaxWidth(1f)
 
         ) {
@@ -50,10 +50,10 @@ fun ListCrafts(navHostController: NavHostController, listCrafts: List<Craft>) {
             verticalArrangement = Arrangement.spacedBy(15.dp),
             modifier = androidx.compose.ui.Modifier
                 .fillMaxWidth(1f)
-                .fillMaxHeight(0.75f)
+                .fillMaxHeight(0.9f)
         ) {
             items(listCrafts, key = { it.uid }) {
-                CraftSection(craft = it)
+                CraftSection(craft = it, navHostController = navHostController)
             }
         }
 

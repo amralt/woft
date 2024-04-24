@@ -38,7 +38,7 @@ fun MainScreen(
             verticalArrangement = Arrangement.Top,
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.outline)
-                .fillMaxHeight(0.15f)
+                .fillMaxHeight(0.1f)
                 .fillMaxWidth(1f)
 
         ) {

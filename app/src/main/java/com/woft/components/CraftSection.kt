@@ -13,13 +13,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.woft.database.Craft
 
 @Composable
 fun CraftSection(
 //    @DrawableRes drawable: Int,
     craft: Craft,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController // TODO изменять состояние в view и открывать main окно по нажатию.
 ) {
     Surface(
         shape = MaterialTheme.shapes.medium,
