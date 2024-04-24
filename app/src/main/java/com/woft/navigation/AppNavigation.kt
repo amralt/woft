@@ -16,15 +16,16 @@ import com.woft.ui.theme.view.MainViewModel
  */
 @Composable
 fun AppNavigation(navHostController: NavHostController, stateCraftList: List<Craft>) {
-    // navController -   startDestination
 
     NavHost(navController = navHostController, startDestination = "main") {
         composable("main") {
             val viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
-            val uiState = viewModel.text.collectAsState()
-            MainScreen(navHostController, uiState.value, { it })
+            val uiState = viewModel.currentCraft.collectAsState()
+            val crafts = viewModel.listCraft.collectAsState()
+            MainScreen(navHostController, uiState.value, crafts.value.get(0), {it})
 
         }
+
         composable("craftList") {
             val viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
             val crafts = viewModel.listCraft.collectAsState()

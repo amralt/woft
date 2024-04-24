@@ -1,7 +1,11 @@
 package com.woft.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -25,11 +29,28 @@ import java.lang.reflect.Modifier
 @Composable
 fun ListCrafts(navHostController: NavHostController, listCrafts: List<Craft>) {
 
-    Column {
+    Column (
+        modifier = androidx.compose.ui.Modifier.fillMaxSize()
+    ) {
 
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top,
+            modifier = androidx.compose.ui.Modifier
+                .background(MaterialTheme.colorScheme.outline)
+                .fillMaxHeight(0.15f)
+                .fillMaxWidth(1f)
+
+        ) {
+            Text("Список советов")
+        }
 
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(15.dp)
+            verticalArrangement = Arrangement.spacedBy(15.dp),
+            modifier = androidx.compose.ui.Modifier
+                .fillMaxWidth(1f)
+                .fillMaxHeight(0.75f)
         ) {
             items(listCrafts, key = { it.uid }) {
                 CraftSection(craft = it)
@@ -37,7 +58,7 @@ fun ListCrafts(navHostController: NavHostController, listCrafts: List<Craft>) {
         }
 
         Column(
-            horizontalAlignment = Alignment.End
+            horizontalAlignment = Alignment.End,
         ) {
 
             NavigationBar(
@@ -55,7 +76,7 @@ fun ListCrafts(navHostController: NavHostController, listCrafts: List<Craft>) {
                         Text("Инструкция")
                     },
                     selected = true,
-                    onClick = { navHostController.navigate("second") }
+                    onClick = { navHostController.navigate("main") }
                 )
 
             }
