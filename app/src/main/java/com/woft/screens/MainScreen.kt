@@ -1,5 +1,6 @@
 package com.woft.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,8 +8,10 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -19,15 +22,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.woft.database.Craft
+import com.woft.ui.theme.view.MainViewModel
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun MainScreen(
     navHostController: NavHostController,
-    currentCraft: String,
-    //craft: Craft?,
-    onChangeButtonClick: (String) -> Unit
+    onChangeButtonClick: (String) -> Unit,
+    vm: MainViewModel
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -40,11 +47,22 @@ fun MainScreen(
                 .background(MaterialTheme.colorScheme.outline)
                 .fillMaxHeight(0.1f)
                 .fillMaxWidth(1f)
+//                .weight(0.5f)
 
         ) {
-            if (craft != null) {
-                Text(craft.craftName!!)
-            }
+            Text(
+                text = vm.currentCraft.value.craftName.toString(),
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                modifier = Modifier.padding(10.dp)
+            )
+        }
+
+        Column () {
+            Text(
+                text = vm.currentCraft.value.description.toString()
+
+            )
         }
 
         Column (
@@ -73,7 +91,7 @@ fun MainScreen(
                 NavigationBarItem(
                     icon = {
                         Icon(
-                            imageVector = Icons.Default.,
+                            imageVector = Icons.Default.Home,
                             contentDescription = null
                         )
                     },

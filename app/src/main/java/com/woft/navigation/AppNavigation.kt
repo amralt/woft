@@ -20,16 +20,14 @@ fun AppNavigation(navHostController: NavHostController, stateCraftList: List<Cra
     NavHost(navController = navHostController, startDestination = "main") {
         composable("main") {
             val viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
-            val uiState = viewModel.currentCraft.collectAsState()
-            val crafts = viewModel.listCraft.collectAsState()
-            MainScreen(navHostController, uiState.value, crafts.value.get(0), {it})
+            MainScreen(navHostController, {it}, viewModel)
 
         }
 
         composable("craftList") {
             val viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
             val crafts = viewModel.listCraft.collectAsState()
-            ListCrafts(navHostController, crafts.value)
+            ListCrafts(navHostController, crafts.value, viewModel)
         }
     }
 }

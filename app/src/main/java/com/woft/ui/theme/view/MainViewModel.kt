@@ -10,9 +10,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.woft.database.Craft
 import com.woft.database.CraftsDao
+import com.woft.database.scripts.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -22,11 +26,12 @@ import kotlinx.coroutines.launch
  */
 class MainViewModel(
     private val savedStateHandle: SavedStateHandle,
-    private val applicationContext: Context,
+    private val applicationContext: Context
 ): ViewModel() {
     // obsorval класс полуает данные и при их обновлении они меняются
 
     //val currentCraft: MutableStateFlow<String> = MutableStateFlow("hello woft")
+    val db = AppDatabase.getInstance(applicationContext)
     val currentCraft: MutableStateFlow<Craft> = MutableStateFlow(
         Craft(
             uid = -1,
@@ -35,18 +40,27 @@ class MainViewModel(
             picPath = null
         )
     )
-    val listCraft: MutableStateFlow<List<Craft>> = MutableStateFlow(listOf<Craft>(
-        Craft(
-            uid = -1,
-            craftName = "Woft",
-            description = "Наше приложение поможет вам подготовиться к путешествиям.Здесь вы увидете самые разные советы для начинающих авантюристов.",
-            picPath = null
+    val listCraft: StateFlow<List<Craft>> = db!!.craftsDao().getAll().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = listOf(
+            Craft(
+                uid = -1,
+                craftName = "Woft",
+                description = "Наше приложение поможет вам подготовиться к путешествиям.Здесь вы увидете самые разные советы для начинающих авантюристов.",
+                picPath = null
+            )
         )
-    ))
+    )
 
     private var job: Job? = null
     fun changeCraft(newCraft: Craft) {
         currentCraft.update { newCraft }
+    }
+    fun updateCraftList(newCrafts: List<Craft>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            db!!.craftsDao().insertAll(newCrafts)
+        }
     }
 
     init {
