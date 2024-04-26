@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.woft.database.Craft
 import com.woft.ui.theme.view.MainViewModel
@@ -33,6 +34,7 @@ fun CraftSection(
     navHostController: NavHostController,
     vm: MainViewModel
 ) {
+    val viewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
     Surface(
         shape = MaterialTheme.shapes.medium,
         //color = MaterialTheme.colorScheme.surfaceVariant,
@@ -42,7 +44,7 @@ fun CraftSection(
 //        shadowElevation = CardDefaults.cardElevation(10.dp),
         border = BorderStroke(3.dp, Color.Gray),
         onClick = {
-            vm.changeCraft(craft)
+            viewModel.changeCraft(craft)
             navHostController.navigate("main")
         }
 

@@ -34,7 +34,7 @@ import com.woft.ui.theme.view.MainViewModel
 fun MainScreen(
     navHostController: NavHostController,
     onChangeButtonClick: (String) -> Unit,
-    vm: MainViewModel
+    currentCraft: Craft
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -51,7 +51,7 @@ fun MainScreen(
 
         ) {
             Text(
-                text = vm.currentCraft.value.craftName.toString(),
+                text = currentCraft.craftName.toString(),
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp,
                 modifier = Modifier.padding(10.dp)
@@ -60,7 +60,7 @@ fun MainScreen(
 
         Column () {
             Text(
-                text = vm.currentCraft.value.description.toString()
+                text = currentCraft.description.toString()
 
             )
         }
